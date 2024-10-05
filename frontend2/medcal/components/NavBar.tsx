@@ -27,20 +27,16 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
     {
-        href: "#features",
-        label: "Features",
+        href: "#about",
+        label: "About",
     },
     {
-        href: "#testimonials",
-        label: "Testimonials",
+        href: "#steps",
+        label: "How it Works",
     },
     {
-        href: "#pricing",
-        label: "Pricing",
-    },
-    {
-        href: "#faq",
-        label: "FAQ",
+        href: "#stripe",
+        label: "Stripe",
     },
 ];
 
@@ -64,7 +60,7 @@ export default function Navbar () {
                     <NavigationMenuItem className="font-bold flex">
                         <Link
                             rel="noreferrer noopener"
-                            href="/"
+                            href="#"
                             className="ml-2 font-bold text-xl flex"
                         >
                             MedCal
@@ -73,7 +69,6 @@ export default function Navbar () {
 
                     {/* mobile */}
                     <span className="flex md:hidden">
-            <ToggleNavBar    />
 
             <Sheet
                 open={isOpen}
@@ -145,8 +140,6 @@ export default function Navbar () {
                         >
                             Signup
                         </Link>
-
-                        <ToggleNavBar />
                     </div>
                 </NavigationMenuList>
             </NavigationMenu>
