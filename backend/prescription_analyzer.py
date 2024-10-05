@@ -134,38 +134,42 @@ def generate_ical(formatted_string):
     cal.add_component(event)
 
     med_name_path = medicine.lower().replace(" ", "-")
-    ics_path = f"{ROOT_DIREC}/data/ics-files/{med_name_path}-reminder.ics"
+    local_path = f"/data/ics-files/{med_name_path}-reminder.ics"
+    ics_path = ROOT_DIREC + local_path
     with open(ics_path, 'wb') as f:
         f.write(cal.to_ical())
 
+    return local_path
 
 
 # def plug in to make ical
 
 # main
 
-def main():
+def main(img_path):
+    try:
+        # img_path = "/data/img/prescription.jpg"
+        full_img_path = ROOT_DIREC + img_path
+        raw_img = cv2.imread(full_img_path)
+        
+        processed_img = process_img(raw_img)
+        parsed_string = img_to_string(processed_img)
+
+        formatted_string = gpt_parser(parsed_string)
+        print(formatted_string)
+        #print('Metformin | 1D | 0900 | 12/14/2024')
+
+
+        ics_path = generate_ical(formatted_string)
+        return ics_path
     
-    img_path = "/data/img/prescription.jpg"
-    full_img_path = ROOT_DIREC + img_path
-    raw_img = cv2.imread(full_img_path)
-    
-    processed_img = process_img(raw_img)
-    parsed_string = img_to_string(processed_img)
-
-    formatted_string = gpt_parser(parsed_string)
-    print(formatted_string)
-    #print('Metformin | 1D | 0900 | 12/14/2024')
+    except Exception as e:
+        return False
 
 
-    generate_ical(formatted_string)
-    #generate_ical('Metformin | 1D | 0900 | 12/14/2024')
-    print('done\n')
-
-
-if __name__ == '__main__':
-    # run main function
-    main()
+# if __name__ == '__main__':
+#     # run main function
+#     main()
 
 
 # backend/img-directory/IMG_5211.jpeg
