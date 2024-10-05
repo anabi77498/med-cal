@@ -72,26 +72,29 @@ def gpt_parser(s):
 
 
 #def to get frequency of ical
-def set_recurrence_rule(event, dosage):
+def set_recurrence_rule(event, dosage, refill_date):
     # Parse the dosage string
     if dosage.endswith('D'):
         days = int(dosage[:-1])  # Extract the number before 'D'
         if days == 1:
             # Daily recurrence
             event.add('rrule', {
-                'freq': 'daily'
+                'freq': 'daily',
+                'until': refill_date
             })
         else:
             # Every N days
             event.add('rrule', {
                 'freq': 'daily',
-                'interval': days  # Set interval to N days
+                'interval': days,  # Set interval to N days
+                'until': refill_date
             })
     elif dosage.endswith('H'):
         hours = int(dosage[:-1])  # Extract the number before 'H'
         event.add('rrule', {
             'freq': 'hourly',
-            'interval': hours  # Set interval to N hours
+            'interval': hours,  # Set interval to N hours
+            'until': refill_date
         })
 
 # def pass string in gpt api and ask it to generate ical details
@@ -107,6 +110,8 @@ def generate_ical(formatted_string):
     time = string_split[2]
     refill_date = string_split[3]
 
+    refill_date_obj = datetime.strptime(refill_date, '%m/%d/%Y')
+
     
     tz = pytz.timezone('America/New_York')
     start_time = datetime(datetime.now().year, datetime.now().month, datetime.now().day, int(time[:2]), int(time[-2:]), 0, tzinfo=tz)
@@ -116,7 +121,7 @@ def generate_ical(formatted_string):
     event.add('dtend', start_time + timedelta(hours=1))
 
 
-    set_recurrence_rule(event, dosage)
+    set_recurrence_rule(event, dosage, refill_date_obj)
 
 
 
@@ -141,7 +146,7 @@ def generate_ical(formatted_string):
 
 def main():
     
-    img_path = "/data/img/prescription.jpeg"
+    img_path = "/data/img/prescription.jpg"
     full_img_path = ROOT_DIREC + img_path
     raw_img = cv2.imread(full_img_path)
     
@@ -150,9 +155,11 @@ def main():
 
     formatted_string = gpt_parser(parsed_string)
     print(formatted_string)
+    #print('Metformin | 1D | 0900 | 12/14/2024')
 
 
     generate_ical(formatted_string)
+    #generate_ical('Metformin | 1D | 0900 | 12/14/2024')
     print('done\n')
 
 
@@ -161,3 +168,4 @@ if __name__ == '__main__':
 
 
 # backend/img-directory/IMG_5211.jpeg
+
