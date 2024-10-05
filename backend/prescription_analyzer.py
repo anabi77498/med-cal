@@ -12,7 +12,8 @@ from openai import OpenAI
 
 load_dotenv()
 
-openai_api_key = os.getenv('OPENAI_API_KEY')
+OPENAI_KEY = os.getenv('OPENAI_API_KEY')
+ROOT_DIREC = os.getenv('ROOT_DIREC')
 
 # takes preprocess img
 def process_img(img):
@@ -44,22 +45,22 @@ def img_to_string(processed_img):
 
 # def pass string to gpt api to get formatted string
 def gpt_parser(s):
-    
+
     client = OpenAI(
-        api_key=openai_api_key
+        api_key=OPENAI_KEY
     )
 
     prompt = f"""
-            I did OCR on the following prescription: {s}
+            I did OCR on the following prescription: {s} \n\n
             Within this text, there is information about the medication, dosage, time, and refill date.
             Please format the prescription in the following structure: "\"MEDICINE NAME | DOSAGE | TIME TO TAKE | REFILL DATE"\"
             1. The Medicine Name should not be so specific like "Metformin HCL 750 mg (extended-release) generic for Glucophage XR" but rather a simple "Metformin HCL 750 mg" or "Metformin" is fine.
-            2. The Dosage should be "num D/H" for example every day would be "1D" every 6 hours would be "6H" or 1D/6H
-            3. The time to take should be a specific time like "0900" if 9:00 AM or "1700" if 5PM
+            2. The Dosage should be "num D/H" for example every day would be "1D" every 6 hours would be "6H" or 6H
+            3. The time to take should be a specific time like "0900" if 9:00 AM or "1700" if 5PM. The Refill date should be in format MM/DD/YYYY
             Return only the formatted string, nothing else
         """ 
     llm_response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[
                 {"role": "user", "content": prompt}
             ]
@@ -127,7 +128,9 @@ def generate_ical(formatted_string):
     event.add_component(alarm)
     cal.add_component(event)
 
-    with open(f"{medicine}_reminder.ics", 'wb') as f:
+    med_name_path = medicine.lower().replace(" ", "-")
+    ics_path = f"{ROOT_DIREC}/data/ics-files/{med_name_path}-reminder.ics"
+    with open(ics_path, 'wb') as f:
         f.write(cal.to_ical())
 
 
@@ -137,15 +140,19 @@ def generate_ical(formatted_string):
 # main
 
 def main():
-    img_path = '/Users/moeraff/Documents/Hackathon/med-cal/backend/img-dump/IMG_5209.jpeg'
-    raw_img = cv2.imread(img_path)
+    
+    img_path = "/data/img/prescription.jpeg"
+    full_img_path = ROOT_DIREC + img_path
+    raw_img = cv2.imread(full_img_path)
     
     processed_img = process_img(raw_img)
     parsed_string = img_to_string(processed_img)
-    print(parsed_string)
 
-    generate_ical("Metformin HCL 750 mg | 1 D | 0900 | 06/21/2024")
+    formatted_string = gpt_parser(parsed_string)
+    print(formatted_string)
 
+
+    generate_ical(formatted_string)
     print('done\n')
 
 
