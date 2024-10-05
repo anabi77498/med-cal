@@ -10,7 +10,7 @@ import { Label} from "@/components/ui/label"
 
 
 export function UserAuthForm({ className, ...props }) {
-    const [isLoading, setIsLoading] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
     async function onSubmit(event) {
         event.preventDefault()

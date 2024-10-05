@@ -4,9 +4,9 @@ export default function Stripe () {
     return (
         <section
             id="stripe"
-            className="bg-muted/50 py-16 my-24 sm:my-32 mx-20"
+            className="bg-muted/50 py-16 my-24 sm:my-32 "
         >
-            <div className="container lg:grid lg:grid-cols-2 place-items-center">
+            <div className="container lg:grid lg:grid-cols-2 place-items-center mx-20">
                 <div className="lg:col-start-1">
                     <h2 className="text-3xl md:text-4xl font-bold ">
                         All Your
