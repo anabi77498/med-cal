@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -46,6 +46,17 @@ const routeList: RouteProps[] = [
 
 export default function Navbar () {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [mounted, setMounted] = useState(false);
+
+    // Ensure that the component doesn't render until it's mounted on the client
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return null; // Prevent server-rendered content that can cause hydration issues
+    }
+
     return (
         <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
             <NavigationMenu className="mx-auto">
@@ -128,15 +139,12 @@ export default function Navbar () {
                     </nav>
 
                     <div className="hidden md:flex gap-2">
-                        <a
-                            rel="noreferrer noopener"
-                            href="/"
-                            target="_blank"
+                        <Link
+                            href="/login"
                             className={`border ${buttonVariants({ variant: "secondary" })}`}
                         >
-                            <GitHubLogoIcon className="mr-2 w-5 h-5" />
-                            Github
-                        </a>
+                            Signup
+                        </Link>
 
                         <ToggleNavBar />
                     </div>
