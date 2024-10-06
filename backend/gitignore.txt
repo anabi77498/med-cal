@@ -1,0 +1,23 @@
+# Ignore virtual environment directories
+venv/
+.env/
+.env
+venv
+
+# Ignore MacOS system files
+.DS_Store
+@@ -24,16 +24,6 @@ __pycache__/
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+# Ignore PyCharm IDE settings
+.idea/
