@@ -1,10 +1,10 @@
 'use client'
 import { useState, ChangeEvent, FormEvent } from 'react';
-
+import { saveAs } from 'file-saver'; // Importing file-saver
 const ImageUpload = () => {
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<string>('');
-
+  const icsLink = '/uploads/metformin-hcl-750-mg-reminder.ics';
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
     setFile(selectedFile);
@@ -21,22 +21,32 @@ const ImageUpload = () => {
     const formData = new FormData();
     formData.append('file', file);
 
+    // Show "Thank you for your submission" after a few seconds
+    setTimeout(() => {
+      setStatus('Thank you for your submission');
+    }, 2000); // Wait 2 seconds before showing the message
+
     try {
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
-      console.log(res)
+      console.log(res);
 
       if (res.ok) {
-        setStatus('File uploaded successfully!');
+        setStatus('File uploaded successfully! Thank you for your submission.');
       } else {
-        setStatus('Failed to upload file.');
+        setStatus('Failed to upload file. Please try again.');
       }
     } catch (err) {
       console.error('Error uploading file:', err);
-      setStatus('Error uploading file.');
+      setStatus('Error uploading file. Please try again.');
     }
+  };
+
+  // No need to fetch the data from the server, just use the direct link to the file in /public
+  const handleDownload = () => {
+    saveAs(icsLink, 'metformin-hcl-750-mg-reminder.ics'); // Trigger file download with FileSaver
   };
 
   return (
@@ -63,10 +73,23 @@ const ImageUpload = () => {
           </div>
         </form>
         {status && (
-          <p className={`mt-4 text-center ${status.includes('success') ? 'text-green-500' : 'text-red-500'}`}>
+          <p className={"mt-4 text-center text-green-500"}>
             {status}
           </p>
+          
         )}
+        <div className="text-center mt-6">
+        {status && (
+          <div className="text-center mt-6">
+            <button
+              onClick={handleDownload}
+              className="bg-green-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-green-600 transition-colors"
+            >
+              Download Metformin HCL 750 mg Reminder (.ics)
+            </button>
+          </div>
+        )}
+          </div>
       </div>
     </div>
   );
