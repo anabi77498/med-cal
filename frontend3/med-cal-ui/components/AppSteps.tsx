@@ -12,25 +12,25 @@ const features: FeatureProps[] = [
         icon: <MedalIcon />,
         title: "Accessibility",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+            "With just a few questions learn what could be best for you. Figure out what your missing. Be proactive about your health and future.",
     },
     {
         icon: <MapIcon />,
         title: "Community",
         description:
-            "Learn what could be affecting you. Bring up relevant conversations to your doctor. This is a starting point and a solution",
+            "Learn what could be affecting you. Bring up relevant conversations to your doctor. This is a starting point and a solution.",
     },
     {
         icon: <PlaneIcon />,
         title: "Exporting",
         description:
-            "Use our tool to generate the data and advice you need, and take it to wherever works best for you. Fully integrable with Apple Calendar, Google Calendar and More",
+            "Use our tool to generate the data and advice you need, and take it to wherever works best for you. Fully integrable with Apple Calendar, Google Calendar and more.",
     },
     {
         icon: <GiftIcon />,
-        title: "Gamification",
+        title: "Long Term Commitment",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+            "This tool and community plans to serve YOU for the years to come. With more data and more information about your developing health we can help you plan for the future.",
     },
 ];
 

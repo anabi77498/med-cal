@@ -1,7 +1,3 @@
-import FetchDataSteps from "@/components/tutorial/fetch-data-steps";
-import { createClient } from "@/utils/supabase/server";
-import {Apple, InfoIcon, PillBottle, ScrollText} from "lucide-react";
-import { redirect } from "next/navigation";
 import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
@@ -12,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { PillBottle, ScrollText, Apple} from "lucide-react";
 import {
     Tabs,
     TabsContent,
@@ -20,23 +17,13 @@ import {
 } from "@/components/ui/tabs"
 // import { CalendarDateRangePicker } from "@/app/(app)/examples/dashboard/components/date-range-picker"
 // import { MainNav } from "@/app/(app)/examples/dashboard/components/main-nav"
-import Overview from "@/components/Overview";
+// import { Overview } from "@/app/(app)/examples/dashboard/components/overview"
 // import { RecentSales } from "@/app/(app)/examples/dashboard/components/recent-sales"
 // import { Search } from "@/app/(app)/examples/dashboard/components/search"
 // import TeamSwitcher from "@/app/(app)/examples/dashboard/components/team-switcher"
 import {UserNav} from "@/app/[uid]/dashboard/UserNav";
-
-export default async function ProtectedPage() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
-  }
-
+import Overview from "@/components/Overview";
+export default function DashboardPage() {
     return (
         <>
             <div className="md:hidden">
