@@ -82,9 +82,9 @@ export default async function ProtectedPage() {
                             <PillBottle/>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">3</div>
+                            <div className="text-2xl font-bold">6</div>
                             <p className="text-xs text-muted-foreground">
-                                Ss
+                                +200% from last month
                             </p>
                         </CardContent>
                     </Card>
@@ -96,9 +96,9 @@ export default async function ProtectedPage() {
                             <ScrollText/>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">+2350</div>
+                            <div className="text-2xl font-bold">8</div>
                             <p className="text-xs text-muted-foreground">
-                                +180.1% from last month
+                                -5 expired
                             </p>
                         </CardContent>
                     </Card>
@@ -135,7 +135,7 @@ export default async function ProtectedPage() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">+573</div>
+                            <div className="text-2xl font-bold">+573 steps</div>
                             <p className="text-xs text-muted-foreground">
                                 +201 since last hour
                             </p>
