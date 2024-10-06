@@ -1,6 +1,6 @@
-import { Button } from "./ui/button";
+import {Button} from "./ui/button";
 
-export default function Stripe () {
+export default function Stripe() {
     return (
         <section
             id="stripe"
@@ -17,9 +17,8 @@ export default function Stripe () {
                         In One Interface
                     </h2>
                     <p className="text-muted-foreground text-xl mt-4 mb-8 lg:mb-0">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
-                        beatae. Ipsa tempore ipsum iste quibusdam illum ducimus eos. Quasi,
-                        sed!
+                        Learn about what works for you. How you health is impacted today. Medications and tests are
+                        complicated. Let us simplify it for you.
                     </p>
                 </div>
 

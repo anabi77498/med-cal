@@ -40,10 +40,7 @@ const routeList: RouteProps[] = [
         href: "#steps",
         label: "How it Works",
     },
-    {
-        href: "#stripe",
-        label: "Stripe",
-    },
+
 ];
 
 export default function Navbar () {

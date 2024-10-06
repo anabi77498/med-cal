@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Check, Calendar } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default function HeroCards() {
     return (
@@ -78,7 +79,9 @@ export default function HeroCards() {
                 </CardHeader>
 
                 <CardContent>
-                    <Button className="w-full">Sign Up Today</Button>
+                    <Link href="/sign-up">
+                        <Button className="w-full">Sign Up Today</Button>
+                    </Link>
                 </CardContent>
 
                 <hr className="w-4/5 m-auto mb-4" />
@@ -101,15 +104,13 @@ export default function HeroCards() {
             </Card>
 
             {/* Service */}
-            <Card className="absolute w-[200px] -right-[0px] bottom-[20px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+            <Card className="absolute w-[350px] -right-[80px] bottom-[130px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
                 <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
-                    <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
-                    </div>
+
                     <div>
-                        <CardTitle>Light & dark mode</CardTitle>
+                        <CardTitle>Allergies and Prescription Medication</CardTitle>
                         <CardDescription className="text-md mt-2">
-                            Lorem ipsum dolor sit amet consect adipisicing elit. Consectetur
-                            natusm.
+                            Understand what is going in your body. Be alerted of conflicts and potential problems.
                         </CardDescription>
                     </div>
                 </CardHeader>
