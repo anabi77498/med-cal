@@ -3,7 +3,6 @@ import { createClient } from "@/utils/supabase/server";
 import {Apple, InfoIcon, PillBottle, ScrollText} from "lucide-react";
 import { redirect } from "next/navigation";
 import Image from "next/image"
-
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -25,6 +24,7 @@ import Overview from "@/components/Overview";
 // import { Search } from "@/app/(app)/examples/dashboard/components/search"
 // import TeamSwitcher from "@/app/(app)/examples/dashboard/components/team-switcher"
 import {UserNav} from "@/app/[uid]/dashboard/UserNav";
+import ImageUpload from "@/components/ImageUpload";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -84,7 +84,7 @@ export default async function ProtectedPage() {
                         <CardContent>
                             <div className="text-2xl font-bold">3</div>
                             <p className="text-xs text-muted-foreground">
-                                Seems you struggle with dietary conditions. Have you considered eating less fatass?
+                                Ss
                             </p>
                         </CardContent>
                     </Card>
@@ -162,6 +162,10 @@ export default async function ProtectedPage() {
                             {/*<RecentSales />*/}
                         </CardContent>
                     </Card>
+                    <div className="w-[400px]">
+                      <h2 className="ml-10 text-3xl font-bold tracking-tight">Upload a Prescription</h2>
+                      <ImageUpload />
+                    </div>
                 </div>
             </div>
         </>
